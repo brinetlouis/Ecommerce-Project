@@ -24,6 +24,9 @@ urlpatterns = [
     path('minus/<int:i>', views.MinusView.as_view(), name="minus"),
     path('remove/<int:i>', views.RemoveView.as_view(), name="remove"),
     path('orderform', views.OrderView.as_view(), name="orderform"),
+    path('success/<i>', views.SuccessView.as_view(), name="success"),
+    path('myorder', views.MyOrdersView.as_view(), name="myorder"),
+
 ]
 
 

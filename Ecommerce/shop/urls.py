@@ -28,5 +28,6 @@ urlpatterns = [
     path('signout', views.LogoutView.as_view(), name='signout'),
     path('addcategory',views.AddCategoryView.as_view(),name='addcategory'),
     path('addproduct', views.AddProductView.as_view(), name='addproduct'),
+    path('search', views.SearchView.as_view(), name='search'),
 
 ]

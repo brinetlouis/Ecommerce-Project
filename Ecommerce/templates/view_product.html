@@ -35,14 +35,23 @@
                     <div class="single-product-details">
                         <h2>{{pro.name}}</h2>
                         <h5> ₹ {{pro.price}} </h5>
-                        <p class="available-stock"><span> More than {{pro.stock}} available </span><p>
+                        <p class="available-stock">{% if pro.stock > 0 %}<span> More than {{pro.stock}} available </span>{% endif %}<p>
 						<h4>Short Description:</h4>
 						<p>{{pro.description}} </p>
 
 						<div class="price-box-bar">
 							<div class="cart-and-bay-btn">
-								<a class="btn hvr-hover" data-fancybox-close="" href="#">Buy Now</a>
+                                {% if user.is_authenticated %}
+                                {% if user.is_superuser == True %}
+                                <a class="btn hvr-hover" data-fancybox-close="" href="">Add Stock</a>
+                                {% else %}
+								{% if pro.stock > 0 %}
 								<a class="btn hvr-hover" data-fancybox-close="" href="{% url 'cart:addtocart' pro.id %}">Add to cart</a>
+                                {% else %}
+                                <h2>Out Of Stock</h2>
+                                {% endif %}
+                                {% endif %}
+                                {% endif %}
 							</div>
 						</div>
 

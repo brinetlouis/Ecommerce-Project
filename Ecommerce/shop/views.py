@@ -113,3 +113,16 @@ class AddProductView(View):
         if form_instance.is_valid():
             form_instance.save()
             return redirect('shop:categories')
+
+from django.db.models import Q
+class SearchView(View):
+    def get(self,request):
+        return render(request,'search.html')
+    def post(self,request):
+        data = request.POST['s']
+        p = Product.objects.filter(Q(name__contains=data)|Q(category__name__contains=data))
+        if p:
+            return render(request, 'search.html', {'pro': p})
+        else:
+            messages.error(request, 'No Relatable Products')
+            return render(request, 'search.html')
